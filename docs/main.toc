@@ -1,0 +1,36 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}AGRADECIMIENTOS}{1}{section.1}%
+\contentsline {section}{\numberline {2}DEDICATORIA}{2}{section.2}%
+\contentsline {section}{\numberline {3}NOTAS DE ACEPTACIÓN}{3}{section.3}%
+\contentsline {section}{\numberline {4}RESUMEN}{6}{section.4}%
+\contentsline {section}{\numberline {5}INTRODUCCIÓN}{7}{section.5}%
+\contentsline {section}{\numberline {6}GLOSARIO}{8}{section.6}%
+\contentsline {section}{\numberline {7}PREGUNTA PROBLEMA}{9}{section.7}%
+\contentsline {section}{\numberline {8}OBJETIVOS}{10}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Objetivo General}{10}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Objetivos Específicos}{10}{subsection.8.2}%
+\contentsline {section}{\numberline {9}JUSTIFICACIÓN}{11}{section.9}%
+\contentsline {section}{\numberline {10}HIPÓTESIS}{12}{section.10}%
+\contentsline {section}{\numberline {11}ANTECEDENTES}{13}{section.11}%
+\contentsline {section}{\numberline {12}MARCO TEÓRICO}{15}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Definición}{15}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Historia de la programación}{15}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}¿Qué es un algoritmo?}{16}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Lenguajes de programación}{16}{subsection.12.4}%
+\contentsline {subsection}{\numberline {12.5}Pensamiento computacional}{18}{subsection.12.5}%
+\contentsline {subsection}{\numberline {12.6}Programación por bloques}{18}{subsection.12.6}%
+\contentsline {subsection}{\numberline {12.7}Elementos básicos de la programación}{18}{subsection.12.7}%
+\contentsline {subsection}{\numberline {12.8}Aplicaciones de la programación}{18}{subsection.12.8}%
+\contentsline {subsection}{\numberline {12.9}La programación en la educación}{19}{subsection.12.9}%
+\contentsline {subsection}{\numberline {12.10}La programación y la robótica}{19}{subsection.12.10}%
+\contentsline {subsection}{\numberline {12.11}Personas importantes}{20}{subsection.12.11}%
+\contentsline {section}{\numberline {13}\noindent \textbf {MARCO CONCEPTUAL}}{21}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Desarrollo del Proyecto}{21}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Planteamiento del proyecto}{22}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Materiales}{23}{subsection.13.3}%
+\contentsline {subsection}{\numberline {13.4}Armado del piano}{24}{subsection.13.4}%
+\contentsline {subsection}{\numberline {13.5}Programación en Scratch}{24}{subsection.13.5}%
+\contentsline {subsection}{\numberline {13.6}Pruebas y funcionamiento}{25}{subsection.13.6}%
+\contentsline {subsection}{\numberline {13.7}Relación con el pensamiento lógico}{25}{subsection.13.7}%
+\contentsline {section}{\numberline {14}CONCLUSIONES}{27}{section.14}%
+\contentsline {section}{\numberline {15}REFERENCIAS BIBLIOGRÁFICAS}{28}{section.15}%

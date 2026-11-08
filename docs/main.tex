@@ -1,0 +1,520 @@
+% ============================================================
+%  La Programación — Proyecto de grado quinto, Liceo Matovelle
+%  Compilar con: pdflatex (dos pasadas para la tabla de contenido)
+%  Imágenes opcionales (si no existen, se muestra un recuadro):
+%     logo_matovelle.png, figura2.png, figura3.png
+%  (la Figura 1 es el diagrama de flujo hecho con TikZ)
+% ============================================================
+\documentclass[12pt,letterpaper]{article}
+
+% ---------- Codificación e idioma ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla,es-noshorthands]{babel}
+\usepackage{mathptmx}          % Tipografía tipo Times New Roman
+
+% ---------- Formato de página ----------
+\usepackage[margin=2.54cm]{geometry}
+\usepackage{setspace}
+\usepackage{etoolbox}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.27cm}
+\setlength{\parskip}{0pt}
+\doublespacing
+
+% ---------- Elementos gráficos, tablas y listas ----------
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.misc,arrows.meta,positioning,calc}
+\usepackage{tocloft}
+\cftpagenumbersoff{section}
+\cftpagenumbersoff{subsection}
+\cftpagenumbersoff{subsubsection}
+\setlength{\cftsecnumwidth}{2em}
+\setlength{\cftsubsecnumwidth}{3em}
+% ---------- Encabezados de sección ----------
+\titleformat{\section}{\normalfont\large\bfseries\centering}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{0pt}{12pt}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\pretocmd{\section}{\clearpage}{}{}   % cada sección principal en página nueva
+
+% ---------- Numeración de páginas ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% ---------- Macros ----------
+% Imagen con recuadro de reserva si el archivo no existe
+\newcommand{\imagenopcional}[3]{% archivo, ancho, descripción
+  \IfFileExists{#1}{\includegraphics[width=#2]{#1}}{%
+    \fbox{\parbox[c][4cm][c]{#2}{\centering\singlespacing\small\textit{[Insertar imagen: #3]}}}}}
+
+% Figura estilo APA: número en negrita, título en cursiva, nota debajo
+\newcommand{\figuraapa}[5]{% número, título, archivo, ancho, nota
+  \begin{center}
+  \begin{minipage}{\textwidth}
+    \singlespacing
+    \noindent\textbf{Figura #1}\par\smallskip
+    \noindent\textit{#2}\par\smallskip
+    \centering\imagenopcional{#3}{#4}{#2}\par\smallskip
+    \raggedright\noindent\textit{Nota.} #5
+  \end{minipage}
+  \end{center}}
+
+% Entradas del glosario y referencias con sangría francesa
+\newenvironment{glosario}{\begin{description}[leftmargin=0pt,labelindent=0pt,itemsep=4pt,font=\normalfont\bfseries]\singlespacing}{\end{description}}
+\newenvironment{referencias}{\begin{list}{}{\setlength{\leftmargin}{1.27cm}\setlength{\itemindent}{-1.27cm}\setlength{\itemsep}{6pt}\setlength{\parsep}{0pt}\raggedright}\singlespacing}{\end{list}}
+\newcommand{\refitem}[1]{\item #1}
+
+\begin{document}
+% ============================================================
+%  contraPORTADA
+% ============================================================
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\singlespacing
+\vspace*{1cm}
+\imagenopcional{logo_matovelle.png}{7cm}{Logo del Liceo Matovelle}
+
+\vspace{1.5cm}
+{\large Nombre del proyecto:}\par\medskip
+{\Large\bfseries La Programación}\par
+
+\vfill
+Liceo Matovelle\par
+Bogotá, D.C., 11 Noviembre 2026
+\end{titlepage}
+
+% ============================================================
+%  PORTADA
+% ============================================================
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\singlespacing
+\vspace*{1cm}
+\imagenopcional{logo_matovelle.png}{7cm}{Logo del Liceo Matovelle}
+
+\vspace{1.5cm}
+{\large Nombre del proyecto:}\par\medskip
+{\Large\bfseries La Programación}\par
+
+\vspace{1.5cm}
+{\large Integrante:}\par\medskip
+María Camila Jerez Acero\par
+
+\vspace{1.5cm}
+{\large Tutora:}\par\medskip
+María Mercedes Pérez Jutinico\par
+
+\vfill
+Liceo Matovelle\par
+Bogotá, D.C., 11 Noviembre 2026
+\end{titlepage}
+
+% ============================================================
+%  PÁGINAS PRELIMINARES
+% ============================================================
+\section{AGRADECIMIENTOS}
+Hoy quiero dar gracias a Dios por acompañarme en este camino, darme sabiduría y permitirme cumplir esta meta tan especial.
+
+A mi familia, gracias por su amor, paciencia, apoyo y por estar siempre a mi lado, motivándome a aprender y a dar lo mejor de mí. Gracias por creer en mí y ayudarme a hacer realidad este sueño.
+
+A mis profesores, gracias por enseñarme con cariño, por compartir sus conocimientos y guiarme durante este proceso.
+
+Hoy me siento muy feliz y orgullosa de presentar mi proyecto final, porque aprendí que con dedicación, esfuerzo y amor podemos alcanzar nuestras metas.
+
+¡Gracias de todo corazón por ser parte de este logro tan importante en mi vida!
+
+\section{DEDICATORIA}
+Dedico este logro a Dios, por guiar siempre mis pasos, y a mi familia, por ser mi mayor inspiración, por llenarme de amor y apoyarme en cada momento. Gracias por creer en mí, tomar mi mano y enseñarme que, con amor y esfuerzo, puedo alcanzar mis sueños.
+
+Este logro también es de ustedes, porque con su amor me ayudan a crecer y a ser cada día mejor. ¡Los amo con todo mi corazón!
+
+\section{NOTAS DE ACEPTACIÓN}
+\singlespacing
+\vspace{1cm}
+\noindent\rule{\textwidth}{0.4pt}\par\vspace{1.2em}
+\noindent\rule{\textwidth}{0.4pt}\par\vspace{1.2em}
+\noindent\rule{\textwidth}{0.4pt}\par\vspace{1.2em}
+\noindent\rule{\textwidth}{0.4pt}\par\vspace{1.2em}
+\noindent\rule{\textwidth}{0.4pt}\par\vspace{3cm}
+
+\noindent\rule{8cm}{0.4pt}\par
+\noindent Presidente del jurado\par\vspace{2cm}
+
+\noindent\rule{8cm}{0.4pt}\par
+\noindent Jurado\par\vspace{2cm}
+
+\noindent\rule{8cm}{0.4pt}\par
+\noindent Jurado\par
+\doublespacing
+
+% ============================================================
+%  TABLA DE CONTENIDO
+% ============================================================
+\clearpage
+\begin{center}\large\bfseries TABLA DE CONTENIDO\end{center}
+\singlespacing
+\renewcommand{\contentsname}{}
+{\let\clearpage\relax\tableofcontents}
+\doublespacing
+
+% ============================================================
+%  CUERPO DEL TRABAJO
+% ============================================================
+\section{RESUMEN}
+\noindent Este proyecto investiga qué es la programación, cómo ha evolucionado desde la tarjeta perforada hasta la inteligencia artificial y cuáles son sus elementos básicos: los algoritmos, los lenguajes de programación, el pensamiento computacional y los diagramas que ayudan a planificar el código. También se revisan sus aplicaciones en la vida cotidiana, su importancia en la educación y su relación con la robótica. Como aplicación práctica, se diseñó y desarrolló un piano de cuatro teclas con Makey Makey y programación por bloques en Scratch, con el fin de responder cómo ayuda la programación a desarrollar el pensamiento lógico y la resolución de problemas en estudiantes de grado quinto.
+
+\section{INTRODUCCIÓN}
+En la actualidad la tecnología es una parte fundamental en la vida cotidiana, estando presente en muchas de las actividades y espacios que las personas habitan. Por esta razón, es importante que los niños comiencen a informarse y conocer el mundo de la tecnología a través de la programación desde temprana edad, ya que esto permite desarrollar habilidades como la creatividad, pensamiento lógico, resolución de problemas y trabajo en equipo.
+
+En este proyecto se busca visibilizar esta disciplina en niños de básica primaria, para que puedan adquirir las bases fundamentales de la programación y motivarlos a que sigan explorando y aprendiendo de esta rama, con el fin de que los niños puedan prepararse para los retos y oportunidades del futuro.
+
+\section{GLOSARIO}
+\begin{glosario}
+ \item[COBOL:] Lenguaje de programación de alto nivel compilado y de propósito general. Diseñado para el procesamiento de datos comerciales, financieros y administrativos.
+\item[Compilador:] Traduce el código fuente escrito en un lenguaje de programación de alto nivel (C++, Java) a lenguaje de máquina o binario (ceros y unos).
+\item[Diagrama de flujo:] Representación gráfica de los pasos de un algoritmo, ordenados con figuras y flechas. Cada figura del diagrama tiene un significado:
+\begin{itemize}[leftmargin=1.27cm,itemsep=0pt]
+\item \textbf{Óvalo:} indica el inicio y el final del proceso.
+\item \textbf{Rectángulo:} representa una acción o instrucción que se debe realizar.
+\item \textbf{Rombo:} representa una decisión, con respuestas como «sí» o «no».
+\item \textbf{Flecha:} une las figuras e indica el orden en que se siguen los pasos.
+\end{itemize}
+\item[FORTRAN:] Lenguaje de programación de alto nivel compilado y de propósito general. Diseñado para cálculos numéricos avanzados y física computacional.
+\item[Inteligencia artificial generativa:] Es un tipo capaz de crear contenido nuevo y original, a partir de las peticiones o instrucciones que escribe un usuario (\textit{prompt}).
+\item[Inteligencia artificial predictiva:] Usa datos del pasado, estadísticas y aprendizaje automático para encontrar patrones y predecir qué pasará o qué tendencias ocurrirán en el futuro.
+\item[Lenguaje ensamblador:] Es un tipo de programación de bajo nivel que usa símbolos y palabras clave simples, para dar órdenes directas al procesador de una computadora.
+\item[Lenguajes de programación de alto nivel:] Es aquel que usa palabras y reglas muy parecidas al lenguaje humano, ayudando a que las personas puedan leer, escribir y entender el código de forma muy sencilla.
+\item[Pseudocódigo:] Estructuras de programación para planificar la lógica de un software sin depender de una sintaxis rígida.
+\item[Sistemas operativos:] Programa principal de una computadora o celular que ayuda a que funcionen las aplicaciones. Actúa como un puente entre el usuario y la máquina.
+\item[Software:] Conjunto de instrucciones, programas y datos intangibles que le indican a una computadora o dispositivo cómo debe funcionar.
+\item[Tarjetas perforadas:] Lámina de cartulina que contiene datos o programas representados mediante la presencia (valor 1) y la ausencia (valor 0) de agujeros en posiciones predeterminadas.
+\end{glosario}
+
+\section{PREGUNTA PROBLEMA}
+\noindent ¿Cómo ayuda la programación a desarrollar el pensamiento lógico y la resolución de problemas en los estudiantes de grado quinto?
+
+\section{OBJETIVOS}
+\subsection{Objetivo General}
+Investigar la importancia de la programación y desarrollar un proyecto que permita aplicar los conocimientos adquiridos.
+
+\subsection{Objetivos Específicos}
+\begin{enumerate}[leftmargin=1.27cm]
+  \item Comprender qué es la programación y cómo ha evolucionado.
+  \item Identificar los elementos básicos de un programa.
+  \item Reconocer las aplicaciones de la programación en la vida cotidiana.
+  \item Aprender a utilizar una plataforma de programación por bloques.
+  \item Diseñar y desarrollar un proyecto de programación.
+\end{enumerate}
+
+\section{JUSTIFICACIÓN}
+En este proyecto surge la necesidad de acercar a los estudiantes de grado quinto al mundo de la programación, una habilidad cada vez más relevante en el siglo XXI. Los estudiantes no solo aprenderán conceptos básicos de lógica y secuencias, sino que también desarrollarán competencias como el pensamiento computacional, la resolución de problemas y el trabajo en equipo.
+
+La programación en esta etapa escolar permite que los niños comprendan cómo funcionan las tecnologías que usan a diario, fomentando la creatividad y la autonomía. Además, al plantear retos cercanos a su realidad, se motiva su interés y se fortalece su confianza para enfrentar desafíos.
+
+\section{HIPÓTESIS}
+\noindent Si los estudiantes aprenden los fundamentos de la programación mediante actividades prácticas, entonces fortalecerán su pensamiento lógico, su creatividad y su capacidad para resolver problemas.
+
+\section{ANTECEDENTES}
+Según Morales et al. (2020), la programación LOGO es de carácter textual, pero también está la programación visual; para Recarde et al. (2018), la programación visual se caracteriza por formar algoritmos por medio de bloques, los cuales son arrastrados y organizados de tal forma que constituyen secuencias lógicas y forman un determinado programa. Aprender a programar desde la infancia tiene unas ventajas significativas, entre las cuales están: desarrolla el pensamiento lógico-matemático, los estudiantes pasan de ser simples consumidores de tecnología a crear sus propios programas, fomenta el trabajo en equipo y los niños aprenden a comunicarse con la computadora, aspecto fundamental en las competencias del siglo veintiuno, lo cual a su vez permite que sean más creativos, desarrollen problemas de forma lúdica y estructurada, entre otros aspectos.
+
+Colombia es uno de los países en los cuales la transformación en la política pública y en el aspecto curricular, según Riesco et al. (2014), está relegada a mantener consumidores de tecnología, en donde los estudiantes conocen aplicaciones y las usan, más no son prosumidores. Para Manrique et al. (2020), el cambio está en la innovación curricular y para esto propone dos ejes articuladores, enfocados en la programación y la robótica. También cabe resaltar los esfuerzos del Ministerio de Educación y el Ministerio de Tecnologías de la Información y Comunicaciones en convenio con el British Council para capacitar a los docentes del sector público en cursos virtuales de corta duración, en la programación para niños por medio del editor Makecode; desde el año 2019, los docentes replican con sus estudiantes sus aprendizajes (Cerón, 2021).
+
+La enseñanza de la programación en la educación básica ha tomado fuerza en las últimas décadas, porque se reconoce que el pensamiento computacional es una habilidad transversal y no exclusiva de quienes serán programadores. Wing (2006) lo define como un conjunto de procesos de pensamiento que permiten resolver problemas, diseñar sistemas y comprender el comportamiento humano apoyándose en conceptos fundamentales de la informática; además, sostiene que esta habilidad debería desarrollarse desde la infancia, igual que la lectura, la escritura y la aritmética.
+
+En el ámbito internacional, distintos países han incorporado la programación en sus currículos escolares desde edades tempranas, apoyándose en entornos visuales por bloques. Resnick et al. (2009), creadores de Scratch en el MIT Media Lab, plantean que la programación debe aprenderse como una actividad creativa y social: los niños construyen proyectos significativos, los comparten y aprenden de los demás. Estas experiencias evidencian que los estudiantes de primaria pueden comprender conceptos como secuencia, repetición y condición cuando se presentan con ejemplos cercanos y con un propósito claro.
+
+Por su parte, Papert (1980), con su propuesta del construccionismo, sostuvo que los niños aprenden mejor cuando construyen objetos que pueden compartir y reflexionar sobre ellos; su trabajo con el lenguaje Logo sentó las bases de gran parte de las herramientas actuales de programación escolar. En la misma línea, Bers (2018) señala que la programación puede introducirse desde los primeros grados si se emplean materiales concretos, actividades lúdicas y un acompañamiento adecuado por parte del docente.
+
+\section{MARCO TEÓRICO}
+\subsection{Definición}
+La programación es el proceso formal de diseñar, codificar, depurar y mantener el código fuente de un programa, mediante el cual se traducen algoritmos lógicos en un lenguaje comprensible para una computadora, con el objetivo de resolver problemas o ejecutar tareas específicas de manera automatizada.
+
+\subsection{Historia de la programación}
+La programación tuvo su origen en la década de 1800, cuando Joseph Marie Jacquard creó las tarjetas perforadas. Posteriormente, el matemático Charles Babbage intentó construir una máquina programable para hacer cualquier tipo de cálculo, y Ada Lovelace publicó el primer algoritmo que debía seguir esta máquina para poder ser ejecutada. Sin embargo, nunca fue probado, porque la máquina nunca fue construida.
+
+Un siglo después, en medio de la Segunda Guerra Mundial y como una necesidad de sobrevivir, Alan Turing creó la máquina Bombe, que desencriptaba y descifraba los mensajes del ejército alemán para adelantarse a sus estrategias y poder derrotarlos. Actualmente, Alan Turing es considerado el padre de la Ciencia de la Computación y pionero en la Inteligencia Artificial.
+
+En 1946, se creó la ENIAC (\textit{Electronic Numerical Integrator and Computer}), siendo esta la primera computadora electrónica con un propósito general en el mundo. Fue diseñada por John Mauchly y John Presper Eckert en la Universidad de Pensilvania, financiada por el Ejército de Estados Unidos, con el propósito de calcular tablas de tiro de artillería. Además, se considera una máquina innovadora, ya que era reprogramable para resolver una gran variedad de problemas numéricos en física y matemáticas.
+
+En 1947, la británica Kathleen Booth creó el lenguaje ensamblador para la computadora ARC. En 1950, el uso de lenguajes ensambladores se popularizó expandiéndose a otras computadoras. Al mismo tiempo se desarrollaban lenguajes de programación de alto nivel, como Fortran y COBOL.
+
+En 1970, se desarrollaron lenguajes como C y Pascal, que abrieron camino para el desarrollo de software y sistemas operativos. En 1980, se desarrolló C++, que introdujo la programación orientada a objetos. En 1989, se creó Python por Guido van Rossum; su objetivo era crear un lenguaje de programación que fuera fácil de leer y que favoreciera la productividad.
+
+En 1990, se creó la World Wide Web, impulsando el uso de lenguajes como HTML y JavaScript para el desarrollo de páginas web.
+
+En la actualidad, la programación se centra en el desarrollo de la Inteligencia Artificial, tanto generativa como predictiva, el análisis de datos, el desarrollo de software, la ciberseguridad, la computación en la nube y la computación cuántica.
+
+\subsection{¿Qué es un algoritmo?}
+Un algoritmo es un conjunto de instrucciones ordenadas para resolver un problema, realizar un cálculo o desarrollar una tarea. En la programación un algoritmo supone el paso previo a escribir el código. Este le va a dar el impulso a la computadora, celular, máquina, etc., a seguir un paso a paso. También va a permitir la automatización y procesamiento avanzado de instrucciones. Desde una perspectiva técnica, en programación un algoritmo es la descripción lógica y estructurada de un proceso que toma datos de entrada, los transforma mediante operaciones específicas y devuelve una salida concreta. Esta salida puede ser un valor numérico, un texto, una acción en pantalla o incluso la activación de otro proceso dentro de un sistema.
+
+\subsection{Lenguajes de programación}
+Los lenguajes de programación se categorizan mediante diferentes criterios:
+
+\textbf{Lenguajes de bajo nivel:} es el que da las instrucciones con un lenguaje binario y ensamblador que permiten escribir un código eficiente pero complejo. Siendo este un tipo de lenguaje de programación poco entendible por los humanos. Ej.: Assembly, microprogramación y código máquina.
+
+\textbf{Lenguajes de alto nivel:} como Python, JavaScript, Java y C++ (se considera de nivel medio); estos se enfocan en que el lenguaje de computadora sea más fácil de entender para los humanos, pero contienen instrucciones que la computadora sabe interpretar.
+
+\begin{center}
+\singlespacing
+\textbf{Tabla 1}\par\smallskip
+\textit{Diferencias entre los lenguajes de programación}
+\end{center}
+
+{\singlespacing\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{@{}p{1.4cm}p{1.9cm}p{3.3cm}p{3.2cm}p{3.0cm}p{2.7cm}@{}}
+\toprule
+\textbf{Categoría} & \textbf{Lenguaje de programación} & \textbf{Sintaxis (¿cómo se escribe el programa?)} & \textbf{¿Para qué se usa?} & \textbf{¿Quién controla la memoria?} & \textbf{¿Qué tan fácil es de leer?} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Categoría} & \textbf{Lenguaje} & \textbf{Sintaxis} & \textbf{¿Para qué se usa?} & \textbf{¿Quién controla la memoria?} & \textbf{¿Qué tan fácil es de leer?} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Alto nivel & Python & Sin punto y coma, sin llaves, indentación obligatoria, comentarios, sensible a mayúsculas & IA, \textit{machine learning}, ciencia y análisis de datos & El gestor de memoria de Python, a través del intérprete CPython & Es muy fácil, pues su creador lo diseñó específicamente para esto \\ \addlinespace
+Bajo nivel & Assembly & Etiqueta, comentario, operandos & Desarrollo de sistemas operativos, controladores de dispositivos & El programador & Muy difícil \\ \addlinespace
+Nivel medio & C++ & Punto y coma obligatorio, bloques con llaves, tipado estricto, funciones & Videojuegos de alto rendimiento, bases de datos, aplicaciones de diseño & El programador, con \texttt{new} y \texttt{delete} & Moderado a difícil \\ \addlinespace
+Alto nivel & Java & Orientación a objetos, sensible a mayúsculas, el nombre del archivo importa, tipado estricto & Aplicaciones empresariales y corporativas, aplicaciones móviles Android & Se maneja de forma automática con \textit{Garbage Collector} & Fácil a moderado \\ \addlinespace
+Alto nivel & JavaScript & Punto y coma opcional, tipado dinámico y flexible, variables con alcance, integración nativa & Desarrollo \textit{frontend}, desarrollo \textit{backend}, videojuegos y navegadores & Forma automática mediante un \textit{Garbage Collector} & Fácil \\ \addlinespace
+Alto nivel & Scratch & Movimiento, apariencia, eventos, control, operadores & Educación, creación de videojuegos 2D, animaciones, introducción a la robótica & Forma automática y oculta & Extremadamente fácil \\ \addlinespace
+Bajo nivel & Código máquina & Campos fijos de bits & Ejecución directa en el hardware, destino de compilación & El programador o el compilador maneja la memoria & Casi imposible de leer: son cadenas de unos y ceros o su representación en sistema hexadecimal \\ \addlinespace
+Bajo nivel & Micro-programación & Microcódigo & Diseñar e implementar la Unidad de Control de un microprocesador & No existe el concepto de manejo de memoria & Extremadamente difícil \\
+\end{longtable}}
+\doublespacing
+
+\subsection{Pensamiento computacional}
+Es el proceso de pensamiento que permite formular o resolver problemas del mundo real, haciendo uso de habilidades y técnicas, como las secuencias e instrucciones ordenadas (algoritmos), para llegar a la solución.
+
+Implica identificar, representar, organizar y analizar lógicamente la información, implementando posibles soluciones con el objetivo de lograr la combinación más efectiva y eficiente entre pasos y recursos.
+
+\subsection{Programación por bloques}
+La programación por bloques es un método para crear \textit{scripts} y aplicaciones sin necesidad de escribir texto manualmente. En lugar de teclear de forma tediosa, el usuario dispone de elementos gráficos que recuerdan a bloques o piezas de \textit{puzzle} virtuales. Cada uno de esos elementos representa un comando, una instrucción o una estructura lógica concreta.
+
+\subsection{Elementos básicos de la programación}
+Dentro de los elementos de programación más utilizados para llevar a cabo una buena práctica de programación están, por ejemplo, los algoritmos, el pseudocódigo, los diagramas de flujo, los diagramas de bloques, los mapas de entidad-relación y los diagramas de flujo de datos.
+
+\subsection{Aplicaciones de la programación}
+La programación se usa en:
+\begin{itemize}[leftmargin=1.27cm,itemsep=0pt]
+  \item Desarrollo de software y aplicaciones
+    \begin{itemize}[itemsep=0pt]
+      \item Páginas web y plataformas digitales
+      \item Aplicaciones
+      \item Sistemas operativos
+    \end{itemize}
+  \item Inteligencia artificial y datos
+    \begin{itemize}[itemsep=0pt]
+      \item \textit{Machine learning}
+      \item Análisis de \textit{big data}
+    \end{itemize}
+  \item Entretenimiento y videojuegos
+    \begin{itemize}[itemsep=0pt]
+      \item Videojuegos
+      \item Efectos especiales y animación
+    \end{itemize}
+  \item Ciencias, salud y finanzas
+    \begin{itemize}[itemsep=0pt]
+      \item Medicina y salud
+      \item Finanzas y banca
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{12.8.1 La programación en la vida cotidiana}
+La programación está presente en muchas actividades diarias. En celulares y computadores se usa en aplicaciones, juegos y redes sociales; en el hogar, lavadoras, televisores y asistentes de voz siguen instrucciones programadas; en la ciudad, semáforos, cajeros automáticos y GPS funcionan gracias a ella; y en la escuela y la salud, mediante plataformas educativas y citas médicas en línea.
+
+\subsection{La programación en la educación}
+La programación en la educación es importante porque ofrece un marco de trabajo para facilitar el aprendizaje. También facilita el desarrollo de habilidades críticas y analíticas en los estudiantes, favoreciendo su capacidad para la resolución de problemas y pensar de manera lógica.
+
+En el aula, la programación desarrolla el pensamiento lógico y computacional desde pequeños, fortalece la creatividad y la capacidad de resolver problemas, enseña a probar, corregir errores y trabajar en equipo, y prepara a los estudiantes para un mundo digital, pues es una habilidad para el futuro.
+
+\subsection{La programación y la robótica}
+La programación robótica es un tipo de procedimiento que nos ayuda a preparar ciertos dispositivos para que, en base a una serie de factores, se puedan comportar de una forma u otra.
+
+Las instrucciones programadas determinan cómo responde el dispositivo ante esos factores. Un ejemplo de robótica aplicada como forma de educación es el programa Escuela de ROBOTSchool, según su descripción pública; este contenido se refiere a ese programa y no presupone que todos sus cursos tengan la misma organización.
+
+\subsection{Personas importantes}
+\begin{enumerate}[leftmargin=1.27cm,itemsep=0pt]
+  \item \textbf{Charles Babbage:} se considera el padre de los computadores digitales, pues construyó un modelo de calculadora mecánica.
+  \item \textbf{Ada Lovelace:} creó el primer algoritmo para ser procesado por una máquina.
+  \item \textbf{Alan Turing:} fue el creador de la máquina electromecánica precursora de los computadores modernos. Se considera el padre de la ciencia de la computación y pionero de la Inteligencia Artificial.
+  \item \textbf{Grace Hopper:} diseñó el lenguaje COBOL y el primer compilador.
+  \item \textbf{Margaret Hamilton:} diseñó el software guía para llegar a la Luna.
+  \item \textbf{Dennis Ritchie:} inventó el lenguaje C y el sistema Unix.
+  \item \textbf{Linus Torvalds:} desarrolló el núcleo de Linux y el control de versiones Git.
+  \item \textbf{Guido van Rossum:} creó el lenguaje de programación Python.
+  \item \textbf{Tim Berners-Lee:} inventó la World Wide Web (WWW).
+\end{enumerate}
+
+\vspace{1em}
+\section{\noindent\textbf{MARCO CONCEPTUAL}}
+
+\subsection{Desarrollo del Proyecto}
+Para cumplir el objetivo de diseñar y desarrollar un proyecto de programación por bloques, se construyó un piano de cuatro teclas que combina un componente físico (la placa Makey Makey y teclas de papel de aluminio) con un componente de programación (Scratch). Con este trabajo se aplicó lo aprendido sobre algoritmos, secuencias, eventos y pensamiento computacional.
+
+En este proyecto se uso mblock como lenguaje de programacion por bloques, ya que es un software de programación visual que permite a los estudiantes crear programas mediante la manipulación de bloques gráficos. Este enfoque facilita la comprensión de conceptos de programación y fomenta la creatividad y el pensamiento lógico. Mblock nacio como una plataforma educativa basada en Scratch, diseñada para enseñar programación y robótica a estudiantes de todas las edades. Su interfaz intuitiva y amigable permite a los usuarios arrastrar y soltar bloques de código para crear programas interactivos, juegos y proyectos de robótica.
+
+Adicionalmente, se utilizó la placa Makey Makey, un dispositivo que convierte objetos cotidianos en teclas de entrada para computadoras. Esta placa permite a los estudiantes interactuar con su entorno físico y digital, fomentando la creatividad y la experimentación.
+
+Finalmente, se desarrolló una interfaz web como complemento del piano físico. Para construirla se utilizó JavaScript, un lenguaje de programación que permite crear páginas web interactivas. Como punto de partida se analizó el código diseñado en mBlock con Python y, paso a paso, se tradujo esa misma idea al nuevo lenguaje. De esta manera se logró que la música y la lógica original del proyecto funcionaran en una página web moderna, sin perder la experiencia de tocar el piano de forma física.
+
+\clearpage
+\subsection{Planteamiento del proyecto}
+La idea consiste en construir un piano de cuatro teclas en el que cada tecla toque una nota musical. La placa Makey Makey permite que objetos conductores, como el papel de aluminio, funcionen como teclas del computador, y Scratch recibe esas pulsaciones y ejecuta el sonido programado. El proyecto busca responder la pregunta problema: cómo ayuda la programación a desarrollar el pensamiento lógico y la resolución de problemas en estudiantes de grado quinto.
+
+Para dar respuesta a esta pregunta, el proyecto se planificó antes de construirse. La elaboración de un diagrama de flujo es importante para quienes desarrollan programas, ya que es una herramienta que ayuda a diseñar las soluciones de forma más organizada antes de escribir el código. Además, permite seguir el recorrido del programa paso a paso, lo que facilita identificar errores o fallas. Por esta razón, en la Figura 1 se presenta el diagrama de flujo del piano, que resume en orden los pasos del proyecto: armar y conectar el piano, programar en Scratch y decidir qué nota suena según la tecla que se toca. 
+Elaborar este diagrama exige ordenar los pasos y pensar qué ocurre en cada decisión, lo cual hace parte del pensamiento computacional y ayuda a que los estudiantes de grado quinto comprendan conceptos como secuencia y condición.
+\clearpage
+\begin{center}
+\textbf{Figura 1}\par\smallskip
+\textit{Diagrama de flujo del funcionamiento del piano con Makey Makey y Scratch}\par\medskip
+
+\resizebox{!}{0.72\textheight}{%
+\begin{tikzpicture}[
+  node distance=0.7cm and 0.5cm,
+  font=\small,
+  >={Stealth[length=2.2mm]},
+  inicio/.style={rounded rectangle, draw, fill=green!15, minimum height=0.9cm, minimum width=3cm, align=center},
+  proceso/.style={rectangle, draw, fill=blue!8, minimum height=1cm, text width=5.6cm, align=center},
+  decision/.style={diamond, aspect=2.4, draw, fill=yellow!20, align=center, inner sep=1pt, text width=3.4cm},
+  tecla/.style={rectangle, draw, fill=orange!15, minimum height=1.2cm, text width=2.5cm, align=center},
+  flecha/.style={->, thick}
+]
+
+% --- Flujo principal ---
+\node[inicio] (ini) {Inicio};
+\node[proceso, below=of ini] (armar) {Armar el piano: cuatro teclas de aluminio sobre el cartón, cada una con cable caimán a una flecha de la placa, y el quinto cable a EARTH};
+\node[proceso, below=of armar] (scratch) {Conectar la placa al computador (USB), abrir Scratch, agregar la extensión Música y crear cuatro scripts «al presionar tecla»};
+\node[decision, below=0.9cm of scratch] (toca) {¿Se toca una tecla?};
+\node[decision, below=0.9cm of toca] (cual) {¿Cuál tecla?};
+
+% --- Cuatro teclas ---
+\node[tecla, below=1.2cm of cual, xshift=-4.6cm] (do) {Flecha $\downarrow$\\Nota 60 (Do)};
+\node[tecla, right=0.5cm of do] (re) {Flecha $\uparrow$\\Nota 62 (Re)};
+\node[tecla, right=0.5cm of re] (mi) {Flecha $\leftarrow$\\Nota 64 (Mi)};
+\node[tecla, right=0.5cm of mi] (fa) {Flecha $\rightarrow$\\Nota 65 (Fa)};
+
+\node[proceso, below=1.5cm of $(re)!0.5!(mi)$] (suena) {Scratch toca la nota durante 0,25 pulsos};
+\node[decision, below=0.9cm of suena] (seguir) {¿Seguir tocando?};
+\node[inicio, below=1cm of seguir] (fin) {Fin};
+
+% --- Flechas ---
+\draw[flecha] (ini) -- (armar);
+\draw[flecha] (armar) -- (scratch);
+\draw[flecha] (scratch) -- (toca);
+\draw[flecha] (toca) -- node[right]{Sí} (cual);
+
+% No: baja por la izquierda hasta Fin
+\coordinate (izq) at ($(do.west)+(-0.8,0)$);
+\draw[flecha] (toca.west) -- (izq |- toca.west) -- node[left]{No} (izq |- fin.west) -- (fin.west);
+
+% Decisión a cada tecla
+\draw[flecha] (cual.south) -- ++(0,-0.5) -| (do.north);
+\draw[flecha] (cual.south) -- ++(0,-0.5) -| (re.north);
+\draw[flecha] (cual.south) -- ++(0,-0.5) -| (mi.north);
+\draw[flecha] (cual.south) -- ++(0,-0.5) -| (fa.north);
+
+% Teclas a sonido
+\foreach \t in {do,re,mi,fa}{
+  \draw[flecha] (\t.south) -- ++(0,-0.4) -| (suena.north);
+}
+
+\draw[flecha] (suena) -- (seguir);
+\draw[flecha] (seguir) -- node[right]{No} (fin);
+
+% Sí: sube por la derecha y entra al rombo "¿Se toca una tecla?"
+\coordinate (der) at ($(fa.east)+(0.8,0)$);
+\draw[flecha] (seguir.east) -- node[above, pos=0.3]{Sí} (der |- seguir.east) -- (der |- toca.east) -- (toca.east);
+
+\end{tikzpicture}}\par\medskip
+\raggedright\noindent\textit{Nota.} Diagrama elaborado por la autora para explicar el funcionamiento del piano.
+\end{center}
+
+\subsection{Materiales}
+\begin{itemize}[leftmargin=1.27cm,itemsep=0pt]
+  \item Placa Makey Makey con su cable USB.
+  \item Cinco cables caimán: cuatro para las entradas y uno para EARTH.
+  \item Cartón como base del piano.
+  \item Papel de aluminio para las teclas.
+  \item Cinta para fijar los materiales.
+  \item Computador con la plataforma Scratch.
+\end{itemize}
+Las teclas deben permanecer separadas entre sí para que cada una funcione de manera independiente.
+
+\subsection{Armado del piano}
+\begin{enumerate}[leftmargin=1.27cm,itemsep=0pt]
+  \item \textbf{Teclas:} se construyen cuatro teclas de papel de aluminio sobre el cartón, separadas entre sí.
+  \item \textbf{Conexión:} se une cada tecla con un cable caimán a una entrada de la placa, una flecha por tecla.
+  \item \textbf{EARTH:} se conecta el quinto cable a EARTH y se mantiene contacto con el metal para cerrar el circuito.
+\end{enumerate}
+
+\figuraapa{2}{Armado del circuito durante la clase de robótica}{figura2.jpg}{0.45\textwidth}{Evidencia fotográfica del armado y la conexión de los cables, tomada de la presentación del trabajo.}
+
+\subsection{Programación en Scratch}
+\begin{enumerate}[leftmargin=1.27cm,itemsep=0pt]
+  \item \textbf{Extensión:} se abre Scratch y se agrega la extensión Música.
+  \item \textbf{Scripts:} se crean cuatro \textit{scripts} con el bloque «al presionar tecla», uno por cada flecha de la placa.
+  \item \textbf{Notas:} cada \textit{script} toca una nota distinta, las notas 60, 62, 64 y 65, durante 0,25 pulsos (en la escala musical equivalen a Do, Re, Mi y Fa).
+\end{enumerate}
+Cada \textit{script} es un pequeño algoritmo: un evento (presionar la tecla) activa una instrucción (tocar la nota) con una duración definida. Al ser programación por bloques, no fue necesario escribir código de forma manual.
+
+\subsection{Pruebas y funcionamiento}
+\begin{enumerate}[leftmargin=1.27cm,itemsep=0pt]
+  \item \textbf{Prueba 1:} se comprueba cada nota con el teclado del computador, para verificar que los \textit{scripts} funcionan.
+  \item \textbf{Prueba 2:} se tocan las teclas físicas y cada una debe sonar con su nota.
+\end{enumerate}
+
+\figuraapa{3}{Programación y pruebas del piano en el computador}{figura3.jpg}{0.45\textwidth}{Evidencia fotográfica de la práctica con el computador, tomada de la presentación del trabajo.}
+
+Durante las pruebas se debe mantener la placa y el computador secos. Si una tecla no suena, se revisa la conexión del cable, que el contacto con EARTH esté cerrado y que las teclas no se toquen entre sí; este proceso de probar y corregir errores es parte del pensamiento computacional.
+
+\subsection{Relación con el pensamiento lógico}
+El proyecto exigió ordenar pasos, relacionar cada tecla con una instrucción, probar y corregir. De esta manera se evidencia que las actividades prácticas, como la robótica y el piano con Scratch, fortalecen el pensamiento lógico, la creatividad y la capacidad de resolver problemas, lo cual respalda la hipótesis planteada. El trabajo se realizó con computador y cables durante la clase de robótica.
+
+\section{CONCLUSIONES}
+Este proyecto permitió comprender que la programación es el proceso de diseñar, codificar, depurar y mantener programas, y que ha evolucionado desde la tarjeta perforada hasta la inteligencia artificial. En ese recorrido se identificó que los elementos básicos de un programa son los algoritmos, los lenguajes de programación, el pensamiento computacional y los diagramas, como el diagrama de flujo, que ayudan a planificar el código antes de escribirlo.
+
+Estos conceptos no se quedan en la teoría, pues la programación está presente en la vida cotidiana: en los celulares, el hogar, la ciudad, los juegos, la salud y las finanzas. Reconocer esa presencia permite entender por qué es importante que los niños se acerquen a la programación desde temprana edad.
+
+Con esa base se diseñó y desarrolló el piano de cuatro teclas, que permitió responder la pregunta problema: la programación ayuda a desarrollar el pensamiento lógico y la resolución de problemas porque exige ordenar pasos, probar y corregir errores. Además, la programación por bloques en Scratch facilitó este aprendizaje sin necesidad de escribir código, y el proyecto aplicó lo aprendido en un trabajo concreto.
+
+De esta manera, lo investigado respalda la hipótesis planteada: las actividades prácticas, como la robótica y el piano con Scratch, fortalecen el pensamiento lógico, la creatividad y la capacidad de resolver problemas en grado quinto. Por esta razón, los colegios deben implementar la programación desde los primeros grados, porque es una habilidad para el futuro de nuestra generación.
+
+\section{REFERENCIAS BIBLIOGRÁFICAS}
+\begin{referencias}
+\refitem{Bejob. (2017, 23 de febrero). \textit{¿Qué es la programación robótica y para qué sirve?} \url{https://www.bejob.com/que-es-la-programacion-robotica-y-para-que-sirve-2/}}
+\refitem{Coding Giants. (2026, 8 de mayo). \textit{¿Qué es la programación por bloques?} \url{https://codinggiants.es/blog/que-es-la-programacion-por-bloques}}
+\refitem{Cultura. (2020, 22 de junio). \textit{Alan Turing, el padre de la inteligencia artificial}. \url{https://www.cultura.gob.ar/alan-turing-el-padre-de-la-inteligencia-artificial-9162/}}
+\refitem{Díaz Garcés, J. (2023, 23 de octubre). \textit{Historia de la programación}. CIPSA. \url{https://cipsa.net/historia-de-la-programacion/}}
+\refitem{Encyclopaedia Britannica. (s.\,f.). \textit{ENIAC}. \url{https://www.britannica.com/technology/ENIAC}}
+\refitem{Grupo Codesi. (s.\,f.). \textit{Historia de Python: origen, evolución y su impacto en la programación moderna}. \url{https://www.grupocodesi.com/blog/historia-de-python.html}}
+\refitem{Joyanes Aguilar, L. (s.\,f.). \textit{Fundamentos de programación} (4.\textsuperscript{a} ed.). Internet Archive. \url{https://archive.org/details/fundamentos-de-programacion-4ta-edicion-luis-joyanes-aguilar/page/52/mode/2up}}
+\refitem{Revista Convicciones. (s.\,f.). Fundación de Estudios Superiores Comfanorte. \url{https://www.fesc.edu.co/Revistas/OJS/index.php/convicciones/article/view/1900}}
+\refitem{ROBOTSchool. (s.\,f.-a). \textit{Escuela de ROBOTSchool} [Sitio web]. \url{https://class.miel-robotschool.com/escuela/ventas.html}}
+\refitem{ROBOTSchool. (s.\,f.-b). \textit{ROBOTSchool} [Sitio web]. \url{https://robotschool.com.co/}}
+\refitem{Rodríguez Candela, U. (2026, 24 de enero). \textit{La evolución de la programación: historia completa de los lenguajes y tecnologías}. Ulises.io. \url{https://ulises.io/blog/evolucion-programacion-historia-2026}}
+\refitem{Wikipedia. (s.\,f.-a). Kathleen Booth. En \textit{Wikipedia, la enciclopedia libre}. \url{https://es.wikipedia.org/wiki/Kathleen_Booth}}
+\refitem{Wikipedia. (s.\,f.-b). Lenguaje ensamblador. En \textit{Wikipedia, la enciclopedia libre}. \url{https://es.wikipedia.org/wiki/Lenguaje_ensamblador}}
+\refitem{Wikipedia. (s.\,f.-c). Tarjeta perforada. En \textit{Wikipedia, la enciclopedia libre}. \url{https://es.wikipedia.org/wiki/Tarjeta_perforada}}
+\end{referencias}
+
+\end{document}
