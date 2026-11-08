@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PianoBot Cami</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff6ec; --card:#ffffff; --ink:#2b2140; --muted:#6f6585; --line:#eadfce; --code:#2b2140; --codeink:#f3ecff;
+  --do:#f4793b; --re:#f7c32e; --mi:#2fae5a; --fa:#7a4fd6; --glow:transparent;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#17122a; --card:#241c3d; --ink:#f4eeff; --muted:#b4a9cf; --line:#3a2f5c; --code:#0f0b1e; --codeink:#e4d9ff;}
+}
+:root[data-theme="dark"]{--bg:#17122a; --card:#241c3d; --ink:#f4eeff; --muted:#b4a9cf; --line:#3a2f5c; --code:#0f0b1e; --codeink:#e4d9ff;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Fredoka',system-ui,-apple-system,'Segoe UI',sans-serif;display:flex;justify-content:center;padding:24px 16px}
+.app{width:100%;max-width:760px;display:flex;flex-direction:column;gap:18px}
+header{text-align:center}
+h1{margin:0;font-size:clamp(2rem,6vw,3rem);letter-spacing:.5px}
+h1 .pi{color:var(--do)} h1 .bo{color:var(--fa)} h1 .ca{color:var(--mi)}
+header p{margin:6px 0 0;color:var(--muted);font-size:1.02rem}
+.board{position:relative;background:var(--card);border:3px solid var(--line);border-radius:26px;padding:22px 18px 18px;box-shadow:0 10px 30px rgba(60,30,90,.12),0 0 60px 6px var(--glow);transition:box-shadow .15s}
+.keys{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;height:clamp(260px,52vw,380px)}
+.key{--c:var(--do);position:relative;border:0;border-radius:14px 14px 18px 18px;background:var(--c);color:#fff;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px;padding:0 6px 16px;box-shadow:0 8px 0 rgba(0,0,0,.22);transition:transform .08s,filter .08s,box-shadow .08s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.key:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.key .arrow{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:700;line-height:1}
+.key .name{font-size:clamp(1.4rem,5vw,2.1rem);font-weight:700}
+.key .midi{font-size:.85rem;opacity:.9}
+.key .pad{width:62%;height:clamp(54px,12vw,86px);margin-bottom:12px;border-radius:10px;background:repeating-linear-gradient(135deg,#e9e9ee 0 6px,#c9c9d2 6px 12px);box-shadow:inset 0 0 0 2px rgba(0,0,0,.12)}
+.key.on{transform:translateY(7px);filter:brightness(1.18) saturate(1.15);box-shadow:0 1px 0 rgba(0,0,0,.22),0 0 34px 8px var(--c)}
+.black{position:absolute;top:0;width:11%;height:46%;background:#201a33;border-radius:0 0 10px 10px;transform:translateX(-50%);z-index:2;pointer-events:none;box-shadow:0 4px 8px rgba(0,0,0,.3)}
+.note{position:absolute;pointer-events:none;font-size:2rem;font-weight:700;animation:up 1s ease-out forwards;z-index:3}
+@keyframes up{from{opacity:1;transform:translateY(0) rotate(-8deg)}to{opacity:0;transform:translateY(-120px) rotate(14deg)}}
+@media (prefers-reduced-motion: reduce){.note{animation:none;opacity:0}}
+.panel{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:640px){.panel{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px}
+.card h2{margin:0 0 8px;font-size:1rem;color:var(--muted);font-weight:500;letter-spacing:.4px;text-transform:uppercase}
+.now{font-size:2.2rem;font-weight:700;line-height:1.1}
+.now small{display:block;font-size:.95rem;font-weight:500;color:var(--muted);margin-top:4px}
+pre{margin:0;background:var(--code);color:var(--codeink);border-radius:12px;padding:12px 14px;font:500 .82rem/1.55 ui-monospace,Menlo,Consolas,monospace;overflow-x:auto;min-height:4.6em}
+.actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{font-family:inherit;font-weight:700;font-size:1.05rem;border:0;border-radius:999px;padding:12px 24px;cursor:pointer;color:#fff;background:var(--mi);box-shadow:0 5px 0 rgba(0,0,0,.2);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.2)}
+.btn:disabled{opacity:.55;cursor:default}
+.hint{text-align:center;color:var(--muted);font-size:.92rem;margin:0}
+kbd{background:var(--card);border:2px solid var(--line);border-bottom-width:4px;border-radius:7px;padding:1px 7px;font-family:inherit;font-weight:700;color:var(--ink)}
+</style>
+</head>
+<body>
+<main class="app">
+  <header>
+    <h1><span class="pi">Piano</span><span class="bo">Bot</span> <span class="ca">Cami</span> ♪</h1>
+    <p>Toca las teclas de aluminio del Makey Makey, usa las flechas del teclado o haz clic.</p>
+  </header>
+
+  <section class="board" id="board" aria-label="Piano de cuatro teclas">
+    <div class="keys" id="keys">
+      <i class="black" style="left:25%"></i><i class="black" style="left:50%"></i><i class="black" style="left:75%"></i>
+    </div>
+  </section>
+
+  <p class="hint"><kbd>↓</kbd> Do &nbsp; <kbd>↑</kbd> Re &nbsp; <kbd>←</kbd> Mi &nbsp; <kbd>→</kbd> Fa</p>
+
+  <div class="actions">
+    <button class="btn" id="flag">🟢 Bandera verde</button>
+  </div>
+
+  <section class="panel">
+    <div class="card">
+      <h2>Nota actual</h2>
+      <div class="now" id="now">—<small>Toca una tecla para empezar</small></div>
+    </div>
+    <div class="card">
+      <h2>Código de mBlock</h2>
+      <pre id="code">sprite.set_backdrop('backdrop2')</pre>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  // Notas del código de mBlock: backdrop, nota MIDI y duración en pulsos (0,25)
+  var KEYS=[
+    {name:'Do',midi:60,arrow:'↓',code:'ArrowDown', bd:'backdrop3',c:'var(--do)'},
+    {name:'Re',midi:62,arrow:'↑',code:'ArrowUp',   bd:'backdrop4',c:'var(--re)'},
+    {name:'Mi',midi:64,arrow:'←',code:'ArrowLeft', bd:'backdrop5',c:'var(--mi)'},
+    {name:'Fa',midi:65,arrow:'→',code:'ArrowRight',bd:'backdrop6',c:'var(--fa)'}
+  ];
+  var BEATS=0.25, ctx=null, timers={};
+  var $keys=document.getElementById('keys'), $board=document.getElementById('board'),
+      $now=document.getElementById('now'), $code=document.getElementById('code'), $flag=document.getElementById('flag');
+  var els=[];
+
+  KEYS.forEach(function(k,i){
+    var b=document.createElement('button');
+    b.className='key'; b.style.setProperty('--c',k.c);
+    b.setAttribute('aria-label',k.name+' ('+k.arrow+')');
+    b.innerHTML='<span class="pad"></span><span class="arrow">'+k.arrow+'</span><span class="name">'+k.name+'</span><span class="midi">nota '+k.midi+'</span>';
+    b.addEventListener('pointerdown',function(e){e.preventDefault();press(i);});
+    $keys.appendChild(b); els.push(b);
+  });
+
+  // Sonido: equivale a sprite.play_note(nota, 0.25) a 60 pulsos por minuto
+  function tone(n,beats){
+    ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
+    if(ctx.state==='suspended') ctx.resume();
+    var t=ctx.currentTime, d=beats, hz=440*Math.pow(2,(n-69)/12);
+    var g=ctx.createGain();
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.5,t+0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+d+0.6);
+    g.connect(ctx.destination);
+    [['triangle',1,1],['sine',2,.35],['sine',3,.12]].forEach(function(p){
+      var o=ctx.createOscillator(), og=ctx.createGain();
+      o.type=p[0]; o.frequency.value=hz*p[1]; og.gain.value=p[2];
+      o.connect(og); og.connect(g); o.start(t); o.stop(t+d+0.65);
+    });
+  }
+
+  function floatNote(i){
+    var r=els[i].getBoundingClientRect(), br=$board.getBoundingClientRect();
+    var s=document.createElement('span'); s.className='note'; s.textContent=i%2?'♫':'♪';
+    s.style.left=(r.left-br.left+r.width/2-10)+'px'; s.style.top=(r.top-br.top+20)+'px'; s.style.color=KEYS[i].c;
+    $board.appendChild(s); setTimeout(function(){s.remove();},1000);
+  }
+
+  function press(i){
+    var k=KEYS[i];
+    clearTimeout(timers[i]);
+    els[i].classList.add('on');
+    $board.style.setProperty('--glow',k.c);            // cambia el "fondo" como set_backdrop
+    $code.textContent="sprite.set_backdrop('"+k.bd+"')\nsprite.play_note("+k.midi+", "+BEATS+")";
+    $now.innerHTML=k.name+'<small>nota '+k.midi+' · '+(440*Math.pow(2,(k.midi-69)/12)).toFixed(1)+' Hz · '+BEATS+' pulsos</small>';
+    tone(k.midi,BEATS); floatNote(i);
+    timers[i]=setTimeout(function(){                    // time.sleep(0.25) y vuelve a backdrop2
+      els[i].classList.remove('on');
+      $board.style.setProperty('--glow','transparent');
+      $code.textContent="sprite.set_backdrop('backdrop2')";
+    },BEATS*1000);
+  }
+
+  // El Makey Makey funciona como teclado: las flechas tocan las notas
+  document.addEventListener('keydown',function(e){
+    var i=KEYS.findIndex(function(k){return k.code===e.code;});
+    if(i<0) return;
+    e.preventDefault();
+    if(!e.repeat) press(i);
+  });
+
+  // Bandera verde: toca Do, Re, Mi y Fa en orden, como el programa original
+  $flag.addEventListener('click',async function(){
+    $flag.disabled=true;
+    for(var i=0;i<KEYS.length;i++){ press(i); await new Promise(function(r){setTimeout(r,BEATS*1000);}); }
+    await new Promise(function(r){setTimeout(r,350);});
+    $flag.disabled=false;
+  });
+})();
+</script>
+</body>
+</html>
